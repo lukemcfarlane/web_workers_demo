@@ -1,0 +1,47 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: sans-serif;
+  background: linear-gradient(to bottom, rgb(19, 80, 159),rgb(74, 123, 187));
+  padding: 100px;
+  box-sizing: border-box;
+}
+
+h1 {
+  letter-spacing: 1px;
+  font-size: 50px;
+}
+
+input {
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 30px;
+  color: white;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.536);
+}
+
+.input-container {
+  position: relative;
+  display: inline-block;
+}
+
+.input-container::after {
+  content: '';
+  display: inline-block;
+  border-bottom: 3px solid white;
+  position: absolute;
+  left: -5px;
+  right: -5px;
+  bottom: -10px;
+}
