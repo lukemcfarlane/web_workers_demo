@@ -8,19 +8,28 @@ function init () {
 
 async function loadSightings (fromYear, toYear) {
   showSpinner()
+  const startedAt = new Date()
   const params = {fromYear, toYear}
   if (USE_WORKER) {
     const worker = new Worker('app/worker.js')
     worker.onmessage = function (e) {
       renderSightings(e.data)
+      renderElapsedTime(e.data.length, startedAt)
       hideSpinner()
     }
     worker.postMessage(params)
   } else {
     const res = await UFOSightings.getData(params)
     renderSightings(res.data)
+    renderElapsedTime(res.data.length, startedAt)
     hideSpinner()
   }
+}
+
+function renderElapsedTime (num, startedAt) {
+  const el = document.querySelector('.elapsed-time')
+  const secs = ((new Date()) - startedAt) / 1000
+  el.innerText = `Loaded ${num} sightings in ${secs} seconds`
 }
 
 function renderSightings(data) {
