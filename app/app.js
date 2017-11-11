@@ -1,7 +1,16 @@
+const USE_WORKER = true
+
 async function init () {
-  const res = await fetch('http://localhost:9292?page=1&per_page=100')
-  const json = await res.json()
-  renderSightings(json.data)
+  if (USE_WORKER) {
+    const worker = new Worker('app/worker.js')
+    worker.onmessage = function (e) {
+      renderSightings(e.data)
+    }
+    worker.postMessage('fetch')
+  } else {
+    const res = await UFOSightings.getData()
+    renderSightings(res.data)
+  }
 }
 
 function renderSightings(data) {
