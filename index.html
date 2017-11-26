@@ -10,7 +10,13 @@
   </head>
   <body>
     <h1>UFO Sightings</h1>
-    <div id='year-slider'></div>
+    <div class='controls'>
+      <div id='year-slider'></div>
+      <label>
+        Use worker
+        <input id='use-worker-cb' type='checkbox' />
+      </label>
+    </div>
     <i class='fa fa-circle-o-notch loading-spinner hidden' aria-hidden='true'></i>
     <div class='elapsed-time'></div>
     <ul id='sightings-list'>

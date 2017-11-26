@@ -4,20 +4,22 @@ import {
   renderSightings,
   renderSlider,
   showSpinner,
-  hideSpinner
+  hideSpinner,
+  initCheckbox
 } from './renderers.js'
 
-const USE_WORKER = false
+let useWorker = false
 
 function init () {
   renderSlider(loadSightings)
+  initCheckbox(checked => useWorker = checked)
 }
 
 async function loadSightings ({ fromYear, toYear }) {
   showSpinner()
   const startedAt = new Date()
   const params = {fromYear, toYear}
-  if (USE_WORKER) {
+  if (useWorker) {
     const worker = new Worker('app/worker.js')
     worker.onmessage = function (e) {
       renderSightings(e.data)

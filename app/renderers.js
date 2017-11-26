@@ -51,3 +51,8 @@ export function hideSpinner () {
   const spinner = document.querySelector('.loading-spinner')
   spinner.classList.add('hidden')
 }
+
+export function initCheckbox (onChange) {
+  const cb = document.querySelector('#use-worker-cb')
+  cb.onchange = e => onChange(e.target.checked)
+}
